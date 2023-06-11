@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* CSS for the modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        .modal img {
+            width: 100%;
+            height: auto;
+        }
+
+        .close {
+            color: #fff;
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Gallery</h1>
+
+    <div class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal-image">
+    </div>
+
+    <div>
+        <img src="image1.jpg" onclick="openModal(this.src)">
+        <img src="image2.jpg" onclick="openModal(this.src)">
+        <img src="image3.jpg" onclick="openModal(this.src)">
+        <img src="image4.jpg" onclick="openModal(this.src)">
+    </div>
+
+    <p id="zoomed-text">This is a sample paragraph.</p>
+    <button onclick="zoomIn()">Zoom In (+)</button>
+    <button onclick="zoomOut()">Zoom Out (-)</button>
+
+    <script>
+        // Modal functionality
+        var modal = document.querySelector('.modal');
+        var modalImage = document.getElementById('modal-image');
+        var closeBtn = document.querySelector('.close');
+
+        function openModal(imageSrc) {
+            modal.style.display = 'block';
+            modalImage.src = imageSrc;
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // Zoom functionality
+        var zoomedText = document.getElementById('zoomed-text');
+
+        function zoomIn() {
+            var fontSize = parseInt(window.getComputedStyle(zoomedText).fontSize);
+            zoomedText.style.fontSize = (fontSize + 10) + 'px';
+        }
+
+        function zoomOut() {
+            var fontSize = parseInt(window.getComputedStyle(zoomedText).fontSize);
+            if (fontSize > 10) {
+                zoomedText.style.fontSize = (fontSize - 10) + 'px';
+            }
+        }
+    </script>
+</body>
+</html>
